@@ -31,5 +31,12 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'Products'
+        verbose_name_plural = 'products'
         ordering = ('-created',)
+
+    def __str__(self):
+        """String view of description"""
+        if len(self.description) > 215:
+            return f"{self.description[:215]}..."
+        else:
+            return f"{self.description}"
