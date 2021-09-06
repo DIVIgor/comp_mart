@@ -32,6 +32,7 @@
         body {
             margin-top: 70px;
         }
+        {% comment %} parameter for correct view of the product image (30vh - viewport height units) {% endcomment %}
         .card-img-top {
             width: 100%;
             height: 30vh;
@@ -40,6 +41,7 @@
     </style>
 </head>
 
+{% comment %} body class flex-column helps keep footer at the end of page {% endcomment %}
 <body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom">
@@ -59,7 +61,7 @@
                             <ul class="dropdown-menu" aria=labelledby="navbarDropdown">
                                 {% for category in categories %}
                                 <li>
-                                    <a class="dropdown-item" href="/{{category.slug}}/products/">{{ category.name }}</a>
+                                    <a class="dropdown-item" href="{{category.get_absolute_url}}">{{ category.name }}</a>
                                 </li>
                                 {% endfor %}
                             </ul>

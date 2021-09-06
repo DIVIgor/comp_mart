@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -11,6 +12,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('store:products', args=[self.slug])
 
 
 class Product(models.Model):
@@ -40,3 +44,7 @@ class Product(models.Model):
             return f"{self.description[:215]}..."
         else:
             return f"{self.description}"
+
+    # function for use dynamic urls by slug in product store urls
+    def get_absolute_url(self):
+        return reverse('store:product', args=[self.category.slug, self.slug])
