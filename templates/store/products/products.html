@@ -1,8 +1,11 @@
 {% extends '../base.html' %}
 
+
+{% block title %}{{category}}{% endblock title %}
+
 {% block content %}
     {% comment %} Showing category {% endcomment %}
-    <h2>Here you can order {{ category|upper }}.</h2>
+    <h2>Here you can order {{ category }}.</h2>
     <hr class="featurette-divider">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for product in products %}

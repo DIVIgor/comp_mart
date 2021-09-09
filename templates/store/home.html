@@ -7,16 +7,18 @@
   <section id="components">
     <main>
     {% comment %} Welkoming header for not logged users {% endcomment %}
-    <div class="welcoming-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Welcome to the CompMart</h1>
-      <p class="fs-5 text-muted">Here you can buy everything to build a fast and poweful PC.</p>
-      <p>
-          <a href="#" class="btn btn-primary my-2">Register</a>
-          <a href="#" class="btn btn-secondary my-2">Log in</a>
-      </p>
-      <hr class="featurette-divider">
-    </div>
-
+    {% if not user.is_unauthorised %}
+      <div class="welcoming-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Welcome to the CompMart</h1>
+        <p class="fs-5 text-muted">Here you can buy everything to build a fast and poweful PC.</p>
+        <p>
+            <a href="{% url 'account:register' %}" class="btn btn-primary my-2">Register</a>
+            <a href="{% url 'account:login' %}" class="btn btn-secondary my-2">Log in</a>
+        </p>
+        <hr class="featurette-divider">
+      </div>
+    {% endif %}
+    
     <div class="container marketing">
       <div class="row featurette">
         <div class="col-md-7">
