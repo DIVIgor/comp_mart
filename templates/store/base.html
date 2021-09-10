@@ -8,7 +8,8 @@
     <title>{% block title %}COMPmart{% endblock title %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
@@ -33,7 +34,15 @@
         body {
             margin-top: 70px;
         }
-        {% comment %} parameter for correct view of the product image (30vh - viewport height units) {% endcomment %}
+
+            {
+            % comment %
+        }
+
+        parameter for correct view of the product image (30vh - viewport height units) {
+            % endcomment %
+        }
+
         .card-img-top {
             width: 100%;
             height: 30vh;
@@ -43,6 +52,7 @@
 </head>
 
 {% comment %} body class flex-column helps keep footer at the end of page {% endcomment %}
+
 <body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-white border-bottom">
@@ -62,7 +72,8 @@
                             <ul class="dropdown-menu" aria=labelledby="navbarDropdown">
                                 {% for category in categories %}
                                 <li>
-                                    <a class="dropdown-item" href="{{category.get_absolute_url}}">{{ category.name }}</a>
+                                    <a class="dropdown-item"
+                                        href="{{category.get_absolute_url}}">{{ category.name }}</a>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -70,8 +81,19 @@
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success me-2" type="submit">Search</button>
                     </form>
+                    <a type="button" role="button" href="{% url 'basket:basket_summary'%}"
+                        class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-basket2" viewBox="0 0 16 16">
+                            <path
+                                d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z" />
+                            <path
+                                d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z" />
+                        </svg>
+                        2
+                    </a>
                 </div>
             </div>
         </nav>
@@ -89,9 +111,9 @@
                     <div>Our phone numbers:</div>
                     <ul>
                         <li>0-800-111-111</li>
-                        
+
                         <li>0-800-222-222</li>
-                        
+
                         <li>0-800-333-333</li>
                     </ul>
                 </div>

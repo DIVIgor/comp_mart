@@ -20,9 +20,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('acc/', include('account.urls')),
-    path('', include('store.urls')),
-    path('basket/', include('basket.urls')),
+    path('acc/', include('account.urls', namespace='account')),
+    path('basket/', include('basket.urls', namespace='basket')),
+    path('', include('store.urls', namespace='store')),
 ]
 
 if settings.DEBUG:
