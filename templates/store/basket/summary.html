@@ -2,4 +2,56 @@
 {% load static %}
 {% block title %}Basket{% endblock title %}
 
-{% block content %}Basket page{% endblock content %}
+{% block content %}
+    <main class="pt-5">
+        <div class="container">
+            <h2 class="h5">Your basket</h2>
+            {% for item in basket %}
+                {% with product=item.product %}
+                    <div class="row mb-4 border">
+                        <div class="col-md-3 col-lg-2 order-md-first bg-light">
+                            <img class="img-fluid mx-auto d-block" width="120px" alt="Image">
+                        </div>
+                        <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
+                            <a href="{{ product.get_absolute_url }}" class="text-decoration-none text-reset"></a>
+                            <div class="border">
+                                <div class="col border-bottom">
+                                    <div class="row p-3">
+                                        <div class="col-6">Price</div>
+                                        <div class="col-6 text-end">
+                                            <span class="h5 fw-bold">${{ product.price }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row p-3">
+                                        <div class="col-12">
+                                            <label for="select">Qty</label>
+                                            <select id="select">
+                                                <option selected>{{ item.quantity }}</option>
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                                <option value="">3</option>
+                                                <option value="">4</option>
+                                                <option value="">5</option>
+                                            </select>
+                                            <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">
+                                                Update
+                                            </button>
+                                            <button type="button" id="delete-button" value="{{product.id}}" class="btn btn-secondary btn-sm">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+            <div class="col-12 text-end">
+                <div class="h6 fw-bold">Sub total: $<span id="subtotal">{{ basket.get_total_price }}</span></div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

@@ -4,8 +4,8 @@
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block content %}
-    <div class="container">
-        <main class="pt-5">
+    <main class="pt-5">
+        <div class="container">
             <div class="row g-3">
                 <div class="col-md-5 col-lg-5 order-md-first">
                     <img class="img-fluid mx-auto d-block" width="500px" src="{{ product.image.url }}" alt="Responsive image">
@@ -34,7 +34,7 @@
                                     </select>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <button type="button" class="btn btn-secondary btn-sm">
+                                    <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">
                                         Add to basket
                                     </button>
                                 </div>
@@ -48,7 +48,27 @@
                 <center><h4 class="mb-0 h5">Technical specs {{ product.name }}</h4></center>
                 <div><p>{{ product.description }}</p></div>
             </div>
-        </main>
+        </div>
+    </main>
 
-    </div>
+<script>
+    $(document).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_add" %}',
+            data: {
+                productid: $('#add-button').val(),
+                productqty: $('#select option:selected').text(),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                action: 'post'
+            },
+            success: function (json) {
+                document.getElementById("basket-qty").innerHTML = json.qty
+            },
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+</script>
+
 {% endblock content %}
