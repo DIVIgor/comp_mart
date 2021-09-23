@@ -8,7 +8,7 @@
             <h2 class="h5">Your basket</h2>
             {% for item in basket %}
                 {% with product=item.product %}
-                    <div class="row mb-4 border-bottom">
+                    <div data-index="{{ product.id }}" class="row mb-4 border-bottom product-item">
                         <div class="col-md-3 col-lg-2 order-md-first">
                             <img class="img-fluid mx-auto d-block" alt="Product image" src="{{ product.image.url }}">
                         </div>
@@ -21,7 +21,7 @@
                                     <div class="row p-3">
                                         <div class="col-6">Price</div>
                                         <div class="col-6 text-end">
-                                            <span class="h5 fw-bold">${{ item.total_price }}</span>
+                                            <span class="h5 fw-bold">${{ product.price }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -37,10 +37,12 @@
                                                 <option value="">4</option>
                                                 <option value="">5</option>
                                             </select>
-                                            <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">
+                                            <button type="button" id="update-button" data-index="{{product.id}}"
+                                                class="btn btn-secondary btn-sm update-button">
                                                 Update
                                             </button>
-                                            <button type="button" id="delete-button" value="{{product.id}}" class="btn btn-secondary btn-sm delete-button">
+                                            <button type="button" id="delete-button" data-index="{{product.id}}"
+                                                class="btn btn-secondary btn-sm delete-button">
                                                 Delete
                                             </button>
                                         </div>
@@ -58,18 +60,43 @@
     </main>
 
     <script>
-        $(document).on('click', '#delete-button', function (e) {
+        // Del item
+        $(document).on('click', '.delete-button', function (e) {
             e.preventDefault();
+            var prod_id = $(this).data('index');
             $.ajax({
                 type: 'POST',
                 url: '{% url "basket:basket_delete" %}',
                 data: {
-                    productid: $('#delete-button').val(),
+                    productid: $(this).data('index'),
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                     action: 'post'
                 },
                 success: function (json) {
-                    {% comment %} document.getElementById("basket-qty").innerHTML = json.qty {% endcomment %}
+                    $('.product-item[data-index="'+ prod_id +'"]').remove();
+                    document.getElementById("basket-qty").innerHTML = json.qty;
+                    document.getElementById("subtotal").innerHTML = json.subtotal
+                },
+                error: function (xhr, errmsg, err) {}
+            });
+        })
+
+        // Update item
+        $(document).on('click', '.update-button', function (e) {
+            e.preventDefault();
+            var prod_id = $(this).data('index');
+            $.ajax({
+                type: 'POST',
+                url: '{% url "basket:basket_update" %}',
+                data: {
+                    productid: $(this).data('index'),
+                    productqty: $('#select'+ prod_id +' option:selected').text(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    action: 'post'
+                },
+                success: function (json) {
+                    document.getElementById("basket-qty").innerHTML = json.qty;
+                    document.getElementById("subtotal").innerHTML = json.subtotal
                 },
                 error: function (xhr, errmsg, err) {}
             });

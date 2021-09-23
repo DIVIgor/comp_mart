@@ -15,10 +15,20 @@ class Basket():
     def add(self, product, qty):
         """Adding and updating the users basket session data"""
         product_id = str(product.id)
-        if product_id not in self.basket:
+        if product_id in self.basket:
+            self.basket[product_id]['qty'] = qty
+        else:
             self.basket[product_id] = {'price': str(product.price), 'qty': int(qty)}
 
-            self.save_session()
+        self.save_session()
+
+    def update(self, product, qty):
+        """Updating values in the users basket session data"""
+        product_id = str(product)
+        product_qty = qty
+        if product_id in self.basket:
+            self.basket[product_id]['qty'] = product_qty
+        self.save_session()
 
     def delete(self, product):
         """Deleting the item from the basket session data"""
