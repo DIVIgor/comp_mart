@@ -16,4 +16,4 @@ def register(request):
 
     # Return an empty or invalid form
     context = {'form': form}
-    return render(request, 'store/registration/register.html', context)
+    return render(request, 'registration/register.html', context)

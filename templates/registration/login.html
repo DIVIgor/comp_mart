@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+{% load bootstrap5 %}
+
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+    {% if form.errors %}
+		<p>Username or password didn't match.</p>
+	{% endif %}
+				
+	<form action="{% url 'account:login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Log in</button>
+        {% endbuttons %}
+		<input type="hidden" name="next" value="{% url 'store:home' %}">
+	</form>
+
+{% endblock content %}
