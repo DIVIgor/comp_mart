@@ -1,5 +1,6 @@
 __pycache__/
 cm_env/
+static/
 *.sqlite3
 .env
 *.log
