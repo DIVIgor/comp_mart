@@ -6,17 +6,17 @@
 {% block content %}
   <section id="components">
     <main>
-    {% if not user.is_authenticated %}
       <div class="welcoming-header p-3 pb-md-4 mx-auto text-center">
         <h1 class="display-4 fw-normal">Welcome to the CompMart</h1>
         <p class="fs-5 text-muted">This app is developing for portfolio. Thank you for visiting.</p>
-        <p>
-            <a href="{% url 'account:register' %}" class="btn btn-primary my-2">Register</a>
+        {% if not user.is_authenticated %}
+          <p>
+            <a href="{% url 'account:register' %}" class="btn btn-primary my-2 me-2">Register</a>
             <a href="{% url 'account:login' %}" class="btn btn-secondary my-2">Log in</a>
-        </p>
+          </p>
+        {% endif %}
         <hr class="featurette-divider">
       </div>
-    {% endif %}
     
     <div class="container marketing">
       <div class="row featurette">
