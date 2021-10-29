@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'basket',
 
     'bootstrap5',
+    'django_countries',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,6 +142,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# New user model
+AUTH_USER_MODEL = 'account.CMUserBase'
+LOGIN_REDIRECT_URL = '/acc/dashboard/'
+LOGIN_URL = '/acc/login/'
+
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 import django_heroku
 django_heroku.settings(locals())

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import CMUserBase
 from django.urls import reverse
 
 
@@ -22,7 +22,7 @@ class Product(models.Model):
         Category, related_name='product', on_delete=models.CASCADE
     )
     created_by = models.ForeignKey(
-        User, related_name='product_creator', on_delete=models.CASCADE
+        CMUserBase, related_name='product_creator', on_delete=models.CASCADE
     )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)

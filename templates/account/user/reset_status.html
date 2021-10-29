@@ -1,0 +1,24 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Reset confirm{% endblock title %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <script>
+            window.location.href = "{% url 'account:dashboard' %}";
+        </script>
+    {% endif %}
+
+    <h2 class="text px-4 py-2">Reset password</h2>
+    <hr class="featurette-divider">
+    <div class="container py-3 mb-3">
+        {% if 'email' in request.get_full_path %}
+            <h3 class="mb-4">We sent you a message with instructions</h3>
+            <p>Please check your email to reset the password.</p>
+        {% endif %}
+        {% if 'complete' in request.get_full_path %}
+            <h3 class="mb-4">Password reset success</h3>
+            <p>Now you can <a href="{% url 'account:login' %}">login</a></p>
+        {% endif %}
+    </div>
+{% endblock content %}

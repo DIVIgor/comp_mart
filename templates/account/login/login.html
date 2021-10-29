@@ -1,0 +1,34 @@
+{% extends 'store/base.html' %}
+
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+    <h2 class="text px-4 py-2">Sign in</h2>
+    <hr class="featurette-divider">
+    <div class="container py-3">
+        <form action="{% url 'account:login' %}" method="post" class="login-form p4 col-lg-6 mx-auto">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissable fade show mb-3" role="alert">
+                    Email or password not correct!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"></button>
+                </div>
+            {% endif %}
+            <div class="form mb-3">
+                <label>{{ form.username.label }}</label>
+                {{form.username}}
+                <label>{{ form.password.label }}</label>
+                {{form.password}}
+                <div style="float: right;">
+                    <button type="submit" class="btn btn-outline-secondary border me-2" value="login">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container py-3">
+        <p class="text-center py-4"><a href="{% url 'account:pwd_reset' %}">Forgoten your password?</a></p>
+    </div>
+{% endblock content %}

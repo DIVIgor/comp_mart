@@ -1,0 +1,19 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+    <h2 class="text px-4 py-2">Your dashboard</h2>
+    <hr class="featurette-divider">
+    <main class="pt-5">
+        <div class="container">
+            <div class="col-12 d-flex justify-content-between">
+                <p>Manage your orders and personal information</p>
+                <a type="button" role="button" href="{% url 'account:edit_info' %}" 
+                    class="btn btn-outline-secondary border me-2">
+                    Change details
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

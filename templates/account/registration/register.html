@@ -1,0 +1,51 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Registration{% endblock title %}
+
+{% block page_header %}
+    <h3>Create your account</h3>
+{% endblock page_header %}
+
+{% block content %}
+    <h2 class="text px-4 py-2">Create an account</h2>
+    <hr class="featurette-divider">
+    <div class="container py-3">
+        <form action="." method="post" class="registration-form p4 col-lg-6 mx-auto">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissable fade show mb-3" role="alert">
+                    <h5>Please correct the following
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"></button>
+                    </h5>
+                    <hr>
+                    <ul>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form mb-3">
+                <label>{{ form.first_name.label }} <span class="text-muted small">Required</span></label>
+                {{form.first_name}}
+                <label>{{ form.last_name.label }} <span class="text-muted small">Required</span></label>
+                {{form.last_name}}
+                <label>{{ form.phone_num.label }} <span class="text-muted small">Required</span></label>
+                {{form.phone_num}}
+                <label>{{ form.email.label }} <span class="text-muted small">Required</span></label>
+                {{form.email}}
+                <label>{{ form.password.label }} <span class="text-muted small">At least 8 chars and 1 digit</span></label>
+                {{form.password}}
+                <label>{{ form.acc_password.label }} <span class="text-muted small">Required</span></label>
+                {{form.acc_password}}
+                <div style="float: right;">
+                    <button type="submit" class="btn btn-outline-secondary border me-2">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

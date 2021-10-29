@@ -102,6 +102,10 @@
                             class="btn btn-outline-secondary border me-2">
                             Logout
                         </a>
+                        <a type="button" role="button" href="{% url 'account:dashboard' %}"
+                            class="btn btn-outline-secondary border me-2">
+                            Acc
+                        </a>
                     {% else %}
                         <a type="button" role="button" href="{% url 'account:login' %}"
                             class="btn btn-outline-secondary border me-2">

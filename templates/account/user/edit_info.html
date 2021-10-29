@@ -1,0 +1,58 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Edit profile{% endblock title %}
+
+{% block content %}
+    <h2 class="text px-4 py-2">Edit profile</h2>
+    <hr class="featurette-divider">
+    <div class="container py-3 mb-3">
+        <form method="post" class="account-form p4 col-lg-6 mx-auto"
+            enctype="mutipart/form-data">
+            {% if user_form.is_valid %}
+                <div class="alert alert-success alert-dismissable fade show mb-3" role="alert">
+                    Details successfully updated!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"></button>
+                    <a class="alert-link me-2" style="float: right;" href="{% url 'account:dashboard' %}">
+                        Back to dashboard
+                    </a>
+                </div>
+            {% endif %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissable fade show mb-3" role="alert">
+                    Wrong input. Please try again!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="float: right;"></button>
+                </div>
+            {% endif %}
+            {% csrf_token %}
+            <div class="form mb-3">
+                <label>{{ user_form.email.label }}</label>
+                {{user_form.email}}
+                <label>{{ user_form.first_name.label }}</label>
+                {{user_form.first_name}}
+                <label>{{ user_form.last_name.label }}</label>
+                {{user_form.last_name}}
+                <label>{{ user_form.phone_num.label }}</label>
+                {{user_form.phone_num}}
+                <div style="float: right;">
+                    <button type="submit" class="btn btn-outline-secondary border me-2" value="save_changes">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br><br><br>
+    <h2 class="text px-4 py-2">Delete account</h2>
+    <hr class="featurette-divider">
+    <div class="container py-3">
+        <form method="post" class="account-form p4 col-lg-6 mx-auto" action="{% url 'account:delete_user' %}">
+            {% csrf_token %}
+            <p>Are youre sure you want to delete your account?</p>
+            <div style="float: right;">
+                <button type="submit" class="btn btn-outline-danger border me-2">
+                    Delete
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
