@@ -7,6 +7,11 @@
 {% endblock page_header %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+        <script>
+            window.location.href = "{% url 'account:dashboard' %}";
+        </script>
+    {% endif %}
     <h2 class="text px-4 py-2">Create an account</h2>
     <hr class="featurette-divider">
     <div class="container py-3">

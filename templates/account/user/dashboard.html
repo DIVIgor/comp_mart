@@ -8,10 +8,8 @@
     <main class="pt-5">
         <div class="container">
             <div class="col-12 d-flex justify-content-between">
-                <p>Manage your orders and personal information</p>
-                <a type="button" role="button" href="{% url 'account:edit_info' %}" 
-                    class="btn btn-outline-secondary border me-2">
-                    Change details
+                <a href="{% url 'account:edit_info' %}">
+                    Manage your orders and personal information
                 </a>
             </div>
         </div>

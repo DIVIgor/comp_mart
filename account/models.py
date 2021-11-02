@@ -67,7 +67,7 @@ class CMUserBase(AbstractBaseUser, PermissionsMixin):
         send_mail(
             subject,
             message,
-            'l@1.com',
+            'div9test@gmail.com',
             [self.email],
             fail_silently=False,
         )
